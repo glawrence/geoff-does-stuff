@@ -1,6 +1,8 @@
 $TotalFirefoxWorkingSet = 0
 $TotalFirefoxThreads = 0
 $FullFirefoxDescription = ""
+$FirefoxStartTime = Get-Date
+
 $Logging = $false
 $FirefoxInfoLogFile = "FirefoxLog.txt"
 
@@ -15,18 +17,26 @@ ForEach ($FfProcess in $FirefoxProcesses) {
     $FirefoxWSKB = $FirefoxWS/1024
     $FirefoxWSMB = $FirefoxWSKB/1024
     $TotalFirefoxWorkingSet = $TotalFirefoxWorkingSet + $FirefoxWS
+
     $TotalFirefoxThreads += $FfProcess.Threads.Count
+
+    if ($FfProcess.StartTime -lt $FirefoxStartTime) {
+        $FirefoxStartTime = $FfProcess.StartTime
+    }
+
     Write-Host "   WS: $($FirefoxWSKB.ToString('#,###').PadLeft(10)) KB $($FirefoxWSMB.ToString('#,###').PadLeft(6)) MB - PID: $($FfProcess.ID.ToString('#####').PadLeft(5)) - Threads: $($FfProcess.Threads.Count)"
 }
 
 if ($TotalFirefoxWorkingSet -gt 0) {
     $TotalWSMB = $TotalFirefoxWorkingSet/1024/1024
-    Write-Host "Total for Firefox processes:"
+    Write-Host "Totals for Firefox processes:"
+    Write-Host "  Start Time: $($FirefoxStartTime.ToString("yyyy-MM-dd HH:mm:ss"))"
     Write-Host "  Working Set: $($TotalWSMB.ToString('#,###.00')) MB"
+    Write-Host "  Processes: $($FirefoxProcesses.count)"
     Write-Host "  Threads: $($TotalFirefoxThreads.ToString('#,###'))"
     if ($Logging) {
         $LogMessage = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-        $LogMessage += " : $($FullFirefoxDescription) - Working Set: $($TotalWSMB.ToString('#,###.00')) MB, Threads: $($TotalFirefoxThreads.ToString('#,###')) Processes: $($FirefoxProcesses.Count)"
+        $LogMessage += " : $($FullFirefoxDescription) - Working Set: $($TotalWSMB.ToString('#,###.00')) MB, Threads: $($TotalFirefoxThreads.ToString('#,###')), Processes: $($FirefoxProcesses.Count), Started: $($FirefoxStartTime.ToString("yyyy-MM-dd HH:mm:ss"))"
         Add-Content -Path $FirefoxInfoLogFile -Value $LogMessage
     }
 } else {
