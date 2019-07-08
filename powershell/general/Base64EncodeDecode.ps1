@@ -1,9 +1,9 @@
 ﻿Function Base64Encode($InputText) {
-    return [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($InputText))
+	return [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($InputText))
 }
 
 Function Base64Decode($InputText) {
-    return [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($InputText))
+	return [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($InputText))
 }
 
 
