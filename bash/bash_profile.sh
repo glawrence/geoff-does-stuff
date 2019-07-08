@@ -2,7 +2,7 @@
 # the end of .bash_profile and other times putting all my changes in a separate file and calling it from .bash_profile or
 # even .bashrc
 
-# rmpwd - this is probably not the best name and ideally it would be a function that detects if dotglob is set or not
+# clpwd - this could be improved by changing it to a function that detects if dotglob is set or not
 
 function gjl {
     echo
@@ -10,15 +10,15 @@ function gjl {
     echo "==================="
     echo "  gjl: display this list of aliases and functions"
     echo
+    echo "  clpwd: this will remove all files, including . files from the current directory"
     echo "  devclean: remove *.o and *.c files from ~/dev/ path"
     echo "  powershell: this maps to pwsh which is what actually launches PowerShell Core"
-    echo "  rmpwd: this will remove all files, including . files from the current directory"
     echo
 }
 
+alias clpwd='shopt -s dotglob && rm -fR ./* && shopt -u dotglob'
 alias devclean='find ~/dev/ -name "*.[oc]" -exec rm {}\;'
 alias powershell=pwsh
-alias rmpwd='shopt -s dotglob && rm -fR ./* && shopt -u dotglob'
 
 gjl
 
