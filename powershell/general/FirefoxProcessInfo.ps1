@@ -4,6 +4,7 @@ $FullFirefoxDescription = ""
 $FirefoxStartTime = Get-Date
 
 $Logging = $false
+$ShowLogFile = $true # Only applicable it $Logging is True
 $FirefoxInfoLogFile = "FirefoxLog.txt"
 
 $FirefoxProcesses = Get-Process | Where-Object Name -eq "Firefox"
@@ -38,6 +39,9 @@ if ($TotalFirefoxWorkingSet -gt 0) {
 		$LogMessage = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
 		$LogMessage += " : $($FullFirefoxDescription) - Working Set: $($TotalWSMB.ToString('#,###.00')) MB, Threads: $($TotalFirefoxThreads.ToString('#,###')), Processes: $($FirefoxProcesses.Count), Started: $($FirefoxStartTime.ToString("yyyy-MM-dd HH:mm:ss"))"
 		Add-Content -Path $FirefoxInfoLogFile -Value $LogMessage
+		if ($ShowLogFile) {
+			Get-Content -Path $FirefoxInfoLogFile | Sort-Object -Descending | Out-GridView -Title "Firefox Log File" -Wait
+		}
 	}
 } else {
 	Write-Host "No Firefox processes found"
