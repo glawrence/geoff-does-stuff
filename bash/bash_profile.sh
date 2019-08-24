@@ -3,6 +3,7 @@
 # even .bashrc
 
 # clpwd - this could be improved by changing it to a function that detects if dotglob is set or not
+# ntp - this uses a command, ntpdate, that might need installing
 
 function gjl {
 	echo
@@ -12,12 +13,14 @@ function gjl {
 	echo
 	echo "  clpwd: this will remove all files, including . files from the current directory"
 	echo "  devclean: remove *.o and *.c files from ~/dev/ path"
+	echo "  ntp: synchronise time with NTP server (uses sudo)"
 	echo "  powershell: this maps to pwsh which is what actually launches PowerShell Core"
 	echo
 }
 
 alias clpwd='shopt -s dotglob && rm -fR ./* && shopt -u dotglob'
 alias devclean='find ~/dev/ -name "*.[oc]" -exec rm {}\;'
+alias ntp='sudo ntpdate -u pool.ntp.org'
 alias powershell=pwsh
 
 gjl
