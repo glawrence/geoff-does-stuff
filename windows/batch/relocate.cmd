@@ -8,10 +8,20 @@ REM * Windows Explorer without deleting the files where the junctions     *
 REM * points to.                                                          *
 REM ***********************************************************************
 
+REM Examples
+REM ********
+REM SET FROM_DIR="C:\Users\username\AppData\Local\Mozilla"
+REM SET TO_DIR="D:\Users\username\AppData\Local\Mozilla"
+
+REM SET FROM_DIR="C:\Program Files\Mozilla Firefox"
+REM SET TO_DIR="D:\Program Files\Mozilla Firefox"
+
+
 SET FROM_DIR="C:\The Temp\Testing"
 SET TO_DIR="D:\The Temp\Testing"
 
-ECHO Moving %FROM_DIR% to %TO_DIR%
+ECHO Moving %FROM_DIR%
+ECHO     to %TO_DIR%
 ECHO Then replacing with a Directory Junction
 ECHO.
 ECHO Are you sure this is correct? (Press Ctrl+C if not)
