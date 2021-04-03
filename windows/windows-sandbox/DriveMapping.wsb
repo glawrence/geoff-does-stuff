@@ -1,0 +1,12 @@
+<Configuration>
+	<MappedFolders>
+		<MappedFolder>
+			<!-->The folder D:\Sandbox will appear as C:\users\WDAGUtilityAccount\Desktop\Sandbox in Windows Sandbox and it will appear as Read-Only<-->
+			<HostFolder>D:\Sandbox</HostFolder>
+			<ReadOnly>true</ReadOnly>
+		</MappedFolder>
+	</MappedFolders>
+	<LogonCommand>
+		<Command>C:\users\WDAGUtilityAccount\Desktop\Sandbox\launch.cmd</Command>
+	</LogonCommand>
+</Configuration>
