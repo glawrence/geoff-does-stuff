@@ -27,6 +27,16 @@ def is_over_one_thousand(input_num):
 	else:
 		return "less than one thousand", input_num
 
+# this method shows an example of how to give a parameter a default value, which can be very useful
+def is_over(input_num, limit_num=1000):
+	if input_num > limit_num:
+		return "{} is over limit of {}".format(input_num, limit_num), input_num, limit_num
+	elif input_num == limit_num:
+		return "{} is exactly limit of {}".format(input_num, limit_num), input_num, limit_num
+	else:
+		return "{} is less than limit of {}".format(input_num, limit_num), input_num, limit_num
+
+
 
 do_some_maths(495)
 do_some_maths(500)
@@ -40,3 +50,11 @@ print("The number is " + is_over_fivehundred(505))
 print("The number is ", is_over_one_thousand(995))
 print("The number {0} is {1}".format(is_over_one_thousand(1000)[1], is_over_one_thousand(1000)[0]))
 print("The number {1} is {0}".format(is_over_one_thousand(1005)[0], is_over_one_thousand(1005)[1]))
+
+# some examples of how to call a method that has a default value, both overriding the default and using it
+print("The limit test result is", is_over(95, 100))
+print("The limit test result is", is_over(100, 100))
+print("The limit test result is", is_over(105, 100))
+print("The limit test result is", is_over(995))
+print("The limit test result is", is_over(1000))
+print("The limit test result is", is_over(1005))
