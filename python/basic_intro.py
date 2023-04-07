@@ -15,6 +15,8 @@ print("""You can put things in "double" quotes when using trebble doubles like t
 MY_CONSTANT = 42
 my_variable = 42
 
+print("\nPi Section\n==========")
+
 # using the math library, output the value of Pi
 print(math.pi)
 
@@ -26,6 +28,8 @@ print("Pi: " + str(value_of_pi)) # we need str() because Pi is a float
 print("Pi:", value_of_pi) # note how using a comma fixes the type issue, but adds a space character
 print("Pi: {0}".format(value_of_pi)) # this technique allows greater control
 print("Pi: {0:.5}".format(value_of_pi)) # we can also round
+
+print("\nOutput Examples\n===============")
 
 # you can identify variables by letter rather than number and use them more than once
 print("The value of {t} is {v}, which can be abbreviated to {v:.3f}".format(v=value_of_pi, t="Pi"))
