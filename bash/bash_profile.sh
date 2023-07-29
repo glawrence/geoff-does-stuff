@@ -5,6 +5,7 @@
 # clpwd - this could be improved by changing it to a function that detects if dotglob is set or not
 # ntp - this uses a command, ntpdate, that might need installing
 
+
 function gjl {
 	echo
 	echo "Configured Commands"
