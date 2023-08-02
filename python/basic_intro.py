@@ -39,3 +39,11 @@ print(f"Hello, {math.sqrt(9)}! How are you?")
 # the string formatting options are useful and worth reading about
 print("Decimal: {0}, Hexadecimal: {0:#X}".format(20))
 print("Decimal: {0}, Hexadecimal: {0:#X}".format(16))
+
+
+print("The value of Pi is %d or %f and my variable is %d" % (value_of_pi, value_of_pi, my_variable))
+print("The value of Pi is {} and my variable is {}".format(value_of_pi, my_variable))
+
+# if you want to, you can "format" print output to a string, for other uses
+my_str = "The value of Pi is {} and my variable is {}".format(value_of_pi, my_variable)
+print("We got:", my_str, "~~", str(len(my_str)))
