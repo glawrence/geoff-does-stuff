@@ -4,10 +4,13 @@ import time
 
 
 def output_example(output_datetime, description):
+	# https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior documents what all the possible % values are
 	print("Outputting:", description)
 	print("  ", output_datetime)
-	print("  ", output_datetime.strftime("%B"))
+	print("   day =", output_datetime.strftime("%d %a %A"))
+	print("   month =", output_datetime.strftime("%m %b %B"))
 	print("  ", output_datetime.strftime("%d-%b-%Y %H:%M:%S"))
+	print("  ", output_datetime.strftime("%Y-%m-%d at %H:%M:%S"))
 
 
 def pause_random_seconds():

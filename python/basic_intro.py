@@ -47,3 +47,9 @@ print("The value of Pi is {} and my variable is {}".format(value_of_pi, my_varia
 # if you want to, you can "format" print output to a string, for other uses
 my_str = "The value of Pi is {} and my variable is {}".format(value_of_pi, my_variable)
 print("We got:", my_str, "~~", str(len(my_str)))
+
+# we can also pad output as follows
+print("Right  [{:>8}]".format(MY_CONSTANT))
+print("Left   [{:<8}]".format(MY_CONSTANT))
+# note this one includes a padding character
+print("Centre [{:.^8}]".format(MY_CONSTANT))
