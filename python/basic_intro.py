@@ -53,3 +53,8 @@ print("Right  [{:>8}]".format(MY_CONSTANT))
 print("Left   [{:<8}]".format(MY_CONSTANT))
 # note this one includes a padding character
 print("Centre [{:.^8}]".format(MY_CONSTANT))
+
+# print allows you to define separators for comma separated list of input
+# it also allows you to change the end from newline to something else
+print("1", "2", "3", "4", sep="~", end="||")
+print("More output")
