@@ -12,8 +12,7 @@ fn main() {
     }
 
     let pid: u32 = std::process::id();
-    println!("pid={}", pid);
-    println!("Done");
+    println!("Done, pid={} has finished", pid);
 
     process::exit(0); // note this will not clean up and call destructors
 }
