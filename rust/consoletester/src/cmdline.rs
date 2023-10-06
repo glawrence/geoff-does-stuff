@@ -1,49 +1,36 @@
 use std::env;
 
-pub(crate) fn do_stuff_with_args() {
+// does the command line switch exist or not
+pub(crate) fn find_switch(arg: String) -> bool {
     let args: Vec<String> = env::args().collect();
-    // dbg!(args.clone());
-    println!("{}", args.len());
-    let v1_iter = args.iter();
-
-    for val in v1_iter {
-        if val.to_lowercase().contains("delay") {
-            println!("Got: {} the one we wanted!", val);
-            println!("     [{}]", val.split(":").last().unwrap())
-        } else {
-            println!("Got: {}", val);
-        }
-    }
     let mut iter = args.iter();
-    let stdout_off = iter.find(|&r| r == "-StandardOutputOff");
-    if stdout_off == None {
-        println!("Not found")
-    } else {
-        println!("Found")
-    }
-    for arg in args.clone() {
-        println!("Arg: {}", arg)
-    }
+    let mut argument: String = String::from("-");
+    argument.push_str(&arg);
+
+    let stdout_off = iter.find(|&r| r == &argument);
+    stdout_off != None
 }
 
-pub(crate) fn find_cmd_line_switch(arg: String) -> String {
+// get the string value of the switch
+pub(crate) fn get_string_value(arg: String) -> String {
     let args: Vec<String> = env::args().collect();
     let v1_iter = args.iter();
 
     let mut result: String = "".to_string();
     for val in v1_iter {
-        if val.to_lowercase().contains(arg.as_str()) {
+        if val.to_lowercase().contains(arg.to_lowercase().as_str()) {
             result = val.split(":").last().unwrap().parse().unwrap();
         }
     }
     result
 }
 
+// get the integer value of the switch
 pub(crate) fn get_integer_value(arg: String, default: u32) -> u32 {
-    let result_s: String = find_cmd_line_switch(arg);
+    let result_s: String = get_string_value(arg);
     let mut result: u32 = default;
     if !result_s.is_empty() {
-        result = result_s.parse().unwrap();
+        result = result_s.parse().unwrap_or(default);
     }
     result
 }
