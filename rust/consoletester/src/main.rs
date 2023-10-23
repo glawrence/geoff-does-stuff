@@ -6,8 +6,8 @@ use std::{thread, time};
 fn main() {
     println!("Console Tester...");
 
-    let b_standard_output: bool = !cmdline::find_switch("StandardOutputOff".to_string());
-    let b_standard_error: bool = !cmdline::find_switch("StandardErrorOff".to_string());
+    let b_standard_output: bool = !cmdline::find_switch_alt("StandardOutputOff");
+    let b_standard_error: bool = !cmdline::find_switch(String::from("StandardErrorOff"));
     println!("Switch Output options, StdOut = {}, StdErr = {}", b_standard_output, b_standard_error);
 
     if !b_standard_output && !b_standard_error {
@@ -15,15 +15,15 @@ fn main() {
         process::exit(-1);
     }
 
-    let delay: u64 = cmdline::get_integer_value("delay".to_string(), 250) as u64;
+    let delay: u64 = cmdline::get_integer_value("delay", 250) as u64;
     let delay_ms = time::Duration::from_millis(delay);
     println!("Switch delay = [{}]", delay);
 
-    let count = cmdline::get_integer_value("count".to_string(), 5);
+    let count = cmdline::get_integer_value("count", 5);
     println!("Switch count = [{}]", count);
 
     let mut message: String;
-    message = cmdline::get_string_value(String::from("message"));
+    message = cmdline::get_string_value("message");
     if message.is_empty() {
         message = "Number".to_string();
     }
@@ -38,7 +38,7 @@ fn main() {
         thread::sleep(delay_ms);
     }
 
-    let pid: u32 = std::process::id();
+    let pid: u32 = process::id();
     println!("pid={}", pid);
 
     process::exit(0); // note this will not clean up and call destructors
