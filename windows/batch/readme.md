@@ -1,5 +1,5 @@
 ## Introduction
-Here is documentation and examples of using Windows Batch script, sometimes called Windows Command script. The recommendation is that PowerShell should be used as it can execute all the commands, however there are times when you will come across batch script files, or they can be just that bit easier.
+Here is documentation and examples of using Windows Batch script, sometimes called Windows Command script. The recommendation is that PowerShell should be used as it can execute all the commands and do a whole lot more, however there are times when you will come across batch script files, or they can be just that bit easier.
 
 ## Helpful References
 [Windows Batch Scripts | Geoff Does Stuff](https://www.geoffdoesstuff.com/windows-batch-scripts)
