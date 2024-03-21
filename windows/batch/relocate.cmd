@@ -10,15 +10,18 @@ REM ***********************************************************************
 
 REM Examples
 REM ********
-REM SET FROM_DIR="C:\Users\username\AppData\Local\Mozilla"
-REM SET TO_DIR="D:\Users\username\AppData\Local\Mozilla"
-
-REM SET FROM_DIR="C:\Program Files\Mozilla Firefox"
-REM SET TO_DIR="D:\Program Files\Mozilla Firefox"
+REM RELOCATE "C:\Users\username\AppData\Local\Mozilla" "D:\Users\username\AppData\Local\Mozilla"
+REM RELOCATE "C:\Program Files\Mozilla Firefox" "D:\Program Files\Mozilla Firefox"
 
 
-SET FROM_DIR="C:\The Temp\Testing"
-SET TO_DIR="D:\The Temp\Testing"
+REM NOTE: the ~ in %~1 removes the quotes passed in
+
+IF "%~1" == "" GOTO error
+IF "%~2" == "" GOTO error
+IF NOT "%~3" == "" GOTO error
+
+SET FROM_DIR=%1
+SET TO_DIR=%2
 
 ECHO Moving %FROM_DIR%
 ECHO     to %TO_DIR%
@@ -29,3 +32,15 @@ PAUSE
 
 ROBOCOPY %FROM_DIR% %TO_DIR% /E /MOVE /ZB /COPYALL
 MKLINK /J %FROM_DIR% %TO_DIR%
+
+GOTO theend
+
+:error
+ECHO Moves files to new location and then creates a junction to the new location
+ECHO.
+ECHO RELOCATE from_dir to_dir
+ECHO.
+ECHO If FROM_DIR or TO_DIR contains space characters, then surround them with double quotes (")
+ECHO.
+
+:theend
