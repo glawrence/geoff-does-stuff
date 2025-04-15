@@ -9,9 +9,15 @@ main_branch_name="main" # 'master' is also used
 
 function update_main_branch {
 	echo "Update the $main_branch_name branch"
-	# update the main branch, but without switching to it
-	git fetch origin $main_branch_name:$main_branch_name --prune
+	current_branch=$(git branch --show-current)
+	if [[ "$current_branch" == "$main_branch_name" ]]; then
+		git fetch origin --prune
+	else
+		# update the main branch, but without switching to it
+		git fetch origin $main_branch_name:$main_branch_name --prune
+	fi
 }
+
 
 function rebase_branch {
 	working_branch=$1
