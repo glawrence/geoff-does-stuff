@@ -6,6 +6,7 @@
 set -eo pipefail
 
 main_branch_name="main" # 'master' is also used
+merged_branch_name="merged-changes"
 
 function update_main_branch {
 	echo "Update the $main_branch_name branch"
@@ -19,25 +20,14 @@ function update_main_branch {
 }
 
 
-function rebase_branch {
+function merge_branch {
 	working_branch=$1
 
 	echo "Processing branch: $working_branch"
 
-	# switch to required working branch
-	echo "~~ change to $working_branch ~~"
-	git checkout $working_branch
-	# get the commit SHA of the latest commit of the local working branch
-	latest_commit=$(git rev-parse HEAD)
-
-	echo "~~ rebase $working_branch onto $main_branch_name ~~"
-	git rebase refs/heads/$main_branch_name
-
-	# force push
-	echo "~~ pushing changes (force push) ~~"
-	git push origin refs/heads/$working_branch:$working_branch --force-with-lease=$working_branch:$latest_commit
-
-	echo "Rebasing of $working_branch completed successfully"
+	echo "~~ merge in $working_branch ~~"
+	# merge changes from working branch, with commit message
+	git merge $working_branch -m "Merged $working_branch"
 }
 
 
@@ -50,14 +40,17 @@ fi
 
 update_main_branch
 
-# capture the current branch
-current_branch=$(git branch --show-current)
+# checkout main branch, before creating new branch
+git checkout $main_branch_name
 
-# rebase all the branches we need to
-rebase_branch feature/GH-0901_fix-issue
-rebase_branch feature/GH-0907_minor-patch
+# create and switch to our new branch
+git checkout -b $merged_branch_name
+
+# merge all the branches we need to
+merge_branch feature/GH-0901_fix-issue
+merge_branch feature/GH-0907_minor-patch
 
 # switch back to the branch we were on when this script started
-git checkout $current_branch
+echo "Everything merged into new branch: $(git branch --show-current)"
 
 echo "Done."
