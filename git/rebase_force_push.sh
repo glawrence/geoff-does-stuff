@@ -44,7 +44,7 @@ function rebase_branch {
 # check for changes and don't continue if any found
 echo "Checking for local changes..."
 if [[ ! -z $(git status --short) ]]; then
-	echo "Cannot continue until you commit, disgard or stash your changes"
+	echo "Cannot continue until you commit, stash or discard your changes"
 	exit 1
 fi
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Bash script which works through a number of branches and rebases them on main and then
-# force pushes the changes, so that they are not behind main but up to date
+# Bash script which merges a number of branches into a new branch
 
 set -eo pipefail
 
@@ -28,14 +27,22 @@ function merge_branch {
 	echo "~~ merge in $working_branch ~~"
 	# merge changes from working branch, with commit message
 	git merge $working_branch -m "Merged $working_branch"
+
+	echo "Merging of $working_branch completed successfully"
 }
 
+
+# check if the target branch already exists
+if [[ ! -z $(git branch --list $merged_branch_name) ]]; then
+	echo "The target branch ($merged_branch_name) already exists"
+	exit 1
+fi
 
 # check for changes and don't continue if any found
 echo "Checking for local changes..."
 if [[ ! -z $(git status --short) ]]; then
-	echo "Cannot continue until you commit, disgard or stash your changes"
-	exit 1
+	echo "Cannot continue until you commit, stash or discard your changes"
+	exit 2
 fi
 
 update_main_branch
